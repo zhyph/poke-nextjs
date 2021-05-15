@@ -32,27 +32,40 @@ export default function Index() {
           borderRadius="3%"
         >
           {pokedex.map((poke) => (
-            <Flex justifyContent="center" alignItems="center">
-              <Center
-                w="200px"
-                h="200px"
-                bg="#D9DFD8"
-                flexDirection="column"
-                borderRadius="20px"
-                m="5"
-              >
-                <Text fontSize="xl" color="black">
-                  {poke.name.english}{" "}
-                </Text>
-                <Image
-                  boxSize="100px"
-                  objectFit="cover"
-                  mt="10px"
-                  src={replace(poke.id)}
-                  alt={poke.name.english}
-                />
-              </Center>
-            </Flex>
+            <Link
+              href={{
+                pathname: "/pokemon/[id]",
+                query: {
+                  name: poke.name.english,
+                  id: poke.id,
+                  img: replace(poke.id),
+                  base: JSON.stringify(poke.base),
+                  type: poke.type,
+                },
+              }}
+            >
+              <Flex justifyContent="center" alignItems="center">
+                <Center
+                  w="200px"
+                  h="200px"
+                  bg="#D9DFD8"
+                  flexDirection="column"
+                  borderRadius="20px"
+                  m="5"
+                >
+                  <Text fontSize="xl" color="black">
+                    {poke.name.english}{" "}
+                  </Text>
+                  <Image
+                    boxSize="100px"
+                    objectFit="cover"
+                    mt="10px"
+                    src={replace(poke.id)}
+                    alt={poke.name.english}
+                  />
+                </Center>
+              </Flex>
+            </Link>
           ))}
         </Grid>
       </Center>
