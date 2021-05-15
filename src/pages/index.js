@@ -1,7 +1,7 @@
-import { Box, Center, Grid } from "@chakra-ui/layout";
+import { Box, Center, Grid, Flex,Text } from "@chakra-ui/layout";
 import { Heading } from "@chakra-ui/react"
 import { Image } from '@chakra-ui/image'
-import { Container } from "../components/Container";
+import { Hero } from "../components/Hero";
 import { pokedex } from '../pokemon.json-master/pokedex'
 import Link from 'next/link'
 
@@ -17,74 +17,74 @@ function replace(a) {
     return '/images/00' + a + '.png'
   }
   if (a < 100) {
-    return '/images/0' + a + '.png'
+    return "/images/0" + a + ".png";
   }
   if (a < 1000) {
-    return '/images/' + a + '.png'
+    return "/images/" + a + ".png";
   }
-
-
 }
 
 export default function Index() {
-
-
-
   return (
-    <Container height="100vh" >
 
+  
+    <Box bg="black">
+      <Hero>Pokedex</Hero>
+      <Center>
+        <Grid
+          templateColumns="repeat(3, 1fr)"
+          width="50%"
+          height="auto"
+          padding="5"
+          gap="3"
+          bg="white"
+          borderRadius="3%"
+        >
+          {pokedex.map((poke) => (
 
-
-      <Grid
-        bg="white"
-        templateColumns="repeat(4, 1fr)"
-        width="100%"
-        height="auto"
-        gap={3}
-      >
-        {pokedex.map((poke ,  index) => (
-
-     
-
-
-         
-          <Link href={{
-            pathname: '/pokemon/[id]',
-            query: {
-              name: poke.name.english,
-              id: poke.id,
-              img:replace(poke.id),
-              base:JSON.stringify(poke.base),
-              type:poke.type
-            },
-          }}>
-
-{/*  */}
-            
-
-
-            <Box >
-              <Center w="200px" h="200" bg="#D9DFD8" flexDirection="column" borderRadius='20px' >
-
-                <h1>{poke.name.english} </h1>
+<Link href={{
+  pathname: '/pokemon/[id]',
+  query: {
+    name: poke.name.english,
+    id: poke.id,
+    img:replace(poke.id),
+    base:JSON.stringify(poke.base),
+    type:poke.type
+  },
+}}>
+            <Flex justifyContent="center" alignItems="center">
+              <Center
+                w="200px"
+                h="200px"
+                bg="#D9DFD8"
+                flexDirection="column"
+                borderRadius="20px"
+                m="5"
+              >
+                <Text fontSize="xl" color="black">
+                  {poke.name.english}{" "}
+                </Text>
                 <Image
                   boxSize="100px"
                   objectFit="cover"
+                  mt="10px"
                   src={replace(poke.id)}
-                  alt="Segun Adebayo" />
+                  alt={poke.name.english}
+                />
               </Center>
-            </Box>
-          </Link>
-          
-          
-        ))}
-      </Grid>
-
-    </Container>
-  )
+            </Flex>
+            </Link>
+          ))}
+        </Grid>
+      </Center>
+    </Box>
+  );
 }
 
+// export async function getServerSideProps() {
+//   // const result = await fetch('http://localhost:3000/api/listpokemon%27);
 
+//   // const listaPokemon = await result.json();
 
 // export async function getServerSideProps() {
 
