@@ -1,9 +1,10 @@
-import { Box, Center, Grid, Text } from "@chakra-ui/layout";
+import { Box, Center, Flex, Grid, Text } from "@chakra-ui/layout";
 import { Heading } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/image";
-import { Container } from "../components/Container";
+import { Hero } from "../components/Hero";
 import { pokedex } from "../pokemon.json-master/pokedex";
 import Link from "next/link";
+import styles from "../../styles/link.module.css";
 
 function replace(a) {
   if (a < 10) {
@@ -26,7 +27,7 @@ export default function Index() {
           templateColumns="repeat(3, 1fr)"
           width="50%"
           height="auto"
-          padding="5"
+          padding="6"
           gap="3"
           bg="white"
           borderRadius="3%"
@@ -44,22 +45,27 @@ export default function Index() {
                 },
               }}
             >
-              <Flex justifyContent="center" alignItems="center">
+              <Flex
+                justifyContent="center"
+                alignItems="center"
+                cursor="pointer"
+                margin="0"
+                padding="1"
+              >
                 <Center
-                  w="200px"
-                  h="200px"
+                  w="100%"
+                  h="100%"
                   bg="#D9DFD8"
                   flexDirection="column"
                   borderRadius="20px"
-                  m="5"
                 >
                   <Text fontSize="xl" color="black">
-                    {poke.name.english}{" "}
+                    {poke.name.english}
                   </Text>
                   <Image
                     boxSize="100px"
                     objectFit="cover"
-                    mt="10px"
+                    m="10px"
                     src={replace(poke.id)}
                     alt={poke.name.english}
                   />

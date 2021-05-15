@@ -6,14 +6,14 @@ import { useEffect } from 'react';
 
 export default function Index() {
     const router = useRouter();
-    const id = router.query;
+    const data = router.query;
 
     useEffect(()=>{
 
-        console.log(id)
+        console.log(data)
 
 
-    },[id])
+    },[data])
 
 
     return (
