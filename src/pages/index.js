@@ -43,7 +43,7 @@ export default function Index() {
       >
         {pokedex.map((poke) => (
           <Box>
-            <Center w="200px" h="200" bg="red" flexDirection="column"  borderRadius='20px' >
+            <Center w="200px" h="200" bg="#D9DFD8" flexDirection="column"  borderRadius='20px' >
 
               <h1>{poke.name.english} </h1>
               <Image
