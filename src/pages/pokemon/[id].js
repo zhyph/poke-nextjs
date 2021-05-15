@@ -6,14 +6,31 @@ import { useEffect } from 'react';
 
 export default function Index() {
     const router = useRouter();
-    const id = router.query;
+    const data = router.query;
 
     useEffect(()=>{
 
-        console.log(id)
+        console.log(data)
+        // console.log(data.base)
+        // const arr = data.base.split(',')
+        // console.log(arr)
+        // const newbase = []
+        // arr.map((item)=>{
+        //     newbase.push(item.replace(/[^\d]+/g,''))
+        // })
+        // console.log(newbase)
+        // const newbase2 = ['HP','Attack','Defense','Sp. Attack','Sp.Defense','Speed']
+        // newbase.map((item,index)=>{
+        //    newbase[index] =  ' '+newbase2[index]+' '+newbase[index]+' '  
+        // })
+        // console.log(newbase)
+
+        console.log(JSON.parse(data.base))
+        
 
 
-    },[id])
+
+    },[data])
 
 
     return (

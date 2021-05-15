@@ -8,9 +8,9 @@ import Link from 'next/link'
 
 
 
-function replace(a) {
 
-  
+
+function replace(a) { 
 
   if (a < 10) {
     
@@ -29,6 +29,7 @@ export default function Index() {
 
   
     <Box bg="black">
+    
       <Hero>Pokedex</Hero>
       <Center>
         <Grid
@@ -51,7 +52,8 @@ export default function Index() {
     base:JSON.stringify(poke.base),
     type:poke.type
   },
-}}>
+}}
+>
             <Flex justifyContent="center" alignItems="center">
               <Center
                 w="200px"
@@ -70,6 +72,7 @@ export default function Index() {
                   mt="10px"
                   src={replace(poke.id)}
                   alt={poke.name.english}
+                 
                 />
               </Center>
             </Flex>
