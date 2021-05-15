@@ -1,14 +1,12 @@
-import { Box, Center, Flex, Grid, Text } from "@chakra-ui/layout";
-import { Heading, Container } from "@chakra-ui/react";
+import { Box, Center, Grid, Text } from "@chakra-ui/layout";
+import { Heading } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/image";
-import { Hero } from "../components/Hero";
+import { Container } from "../components/Container";
 import { pokedex } from "../pokemon.json-master/pokedex";
+import Link from "next/link";
 
 function replace(a) {
-  // console.log("teste", a);
-
   if (a < 10) {
-    // console.log("/images/00" + a + ".png");
     return "/images/00" + a + ".png";
   }
   if (a < 100) {
