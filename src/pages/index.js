@@ -8,9 +8,7 @@ import Link from 'next/link'
 
 
 
-function replace(a) {
-
-  
+function replace(a) { 
 
   if (a < 10) {
     
