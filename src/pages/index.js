@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-   
-=======
 import { Box, Center, Grid, Flex,Text } from "@chakra-ui/layout";
 import { Heading } from "@chakra-ui/react"
 import { Image } from '@chakra-ui/image'
@@ -111,4 +108,3 @@ export default function Index() {
 //     }
 //   }
 // }
->>>>>>> e3de39be92731408b5ebf7be02ee517ef35b3283
