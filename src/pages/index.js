@@ -1,4 +1,5 @@
 import { Box, Center, Grid } from "@chakra-ui/layout";
+import {Heading}from "@chakra-ui/react"
 import { Image } from '@chakra-ui/image'
 import { Container } from "../components/Container";
 import { pokedex } from '../pokemon.json-master/pokedex'
@@ -29,49 +30,22 @@ export default function Index() {
 
 
   return (
-<<<<<<< HEAD
-    <Grid
-      bg="black"
-      templateColumns="repeat(4, 1fr)"
-      width="100%"
-      height="100vh"
-      gap={5}
-    >
-      {data.map((poke) => (
-        <Box>
-          <Center w="200px" h="200" bg="red">
-            <h1>{poke.name} ju bicha</h1>
-          </Center>
-        </Box>
-      ))}
-    </Grid>
-  );
-};
-
-export default Index;
-
-export const getServerSideProps = async (ctx) => {
-  const res = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=50&offset=0"
-  );
-  const data = await res.json();
-=======
-    <Container height="100vh">
+    <Container height="100vh" >
 
 
 
       <Grid
-        bg="black"
+        bg="white"
         templateColumns="repeat(4, 1fr)"
         width="100%"
-        height="100vh"
-        gap={5}
+        height="auto"
+        gap={3}
       >
         {pokedex.map((poke) => (
           <Box>
-            <Center w="200px" h="200" bg="red">
+            <Center w="200px" h="200" bg="#D9DFD8" flexDirection="column"  borderRadius='20px' >
 
-              <h1>{poke.name.english} {replace(poke.id)}</h1>
+              <h1>{poke.name.english} </h1>
               <Image
                 boxSize="100px"
                 objectFit="cover"
@@ -90,9 +64,9 @@ export const getServerSideProps = async (ctx) => {
 
 export async function getServerSideProps() {
 
-  const result = await fetch('http://localhost:3000/api/listpokemon');
+  const result = await fetch('http://localhost:3000/api/listpokemon%27);
 
-  const listaPokemon = await result.json()
+  const listaPokemon = await result.json();
 
   // const arrayData = []
 
@@ -102,7 +76,6 @@ export async function getServerSideProps() {
   //   arrayData.push(pokemon)
   // })
 
->>>>>>> ae4a73ee56ef0e114c138a8662f29b0f1ce18a86
 
   return {
     props: {
