@@ -1,54 +1,31 @@
-import {
-  Link as ChakraLink,
-  Text,
-  Code,
-  List,
-  ListIcon,
-  ListItem,
-} from '@chakra-ui/react'
-import { CheckCircleIcon, LinkIcon } from '@chakra-ui/icons'
-import { Hero } from '../components/Hero'
-import { Container } from '../components/Container'
-import { Main } from '../components/Main'
-import { DarkModeSwitch } from '../components/DarkModeSwitch'
-import { CTA } from '../components/CTA'
-import { Footer } from '../components/Footer'
+import { Box, Center, Grid } from "@chakra-ui/layout";
+import { Container } from "../components/Container";
 
-const Index = () => (
-  <Container height="100vh">
-    <Hero />
-    <Main>
-      <Text>
-        Example repository of <Code>Next.js</Code> + <Code>chakra-ui</Code>.
-      </Text>
+const Index = ({ data }) => {
+  console.log(data);
 
-      <List spacing={3} my={0}>
-        <ListItem>
-          <ListIcon as={CheckCircleIcon} color="green.500" />
-          <ChakraLink
-            isExternal
-            href="https://chakra-ui.com"
-            flexGrow={1}
-            mr={2}
-          >
-            Chakra UI <LinkIcon />
-          </ChakraLink>
-        </ListItem>
-        <ListItem>
-          <ListIcon as={CheckCircleIcon} color="green.500" />
-          <ChakraLink isExternal href="https://nextjs.org" flexGrow={1} mr={2}>
-            Next.js <LinkIcon />
-          </ChakraLink>
-        </ListItem>
-      </List>
-    </Main>
+  return (
+    <Grid bg="black" templateColumns="repeat(4, 1fr)" width="100%" height="100vh" gap={5}>
+      {data.map((poke) => (
+        <Center w="200px" h="200" bg="red">
+          <h1>{poke.name}</h1>
+        </Center>
+      ))}
+    </Grid>
+  );
+};
 
-    <DarkModeSwitch />
-    <Footer>
-      <Text>Next ❤️ Chakra</Text>
-    </Footer>
-    <CTA />
-  </Container>
-)
+export default Index;
 
-export default Index
+export const getServerSideProps = async (ctx) => {
+  const res = await fetch(
+    "https://pokeapi.co/api/v2/pokemon?limit=50&offset=200"
+  );
+  const data = await res.json();
+
+  return {
+    props: {
+      data: data.results,
+    },
+  };
+};
