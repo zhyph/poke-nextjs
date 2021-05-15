@@ -11,6 +11,7 @@ export default function Index() {
     useEffect(()=>{
 
         console.log(data)
+<<<<<<< HEAD:src/pages/pokemon/[slug].js
         // console.log(data.base)
         // const arr = data.base.split(',')
         // console.log(arr)
@@ -24,12 +25,17 @@ export default function Index() {
         //    newbase[index] =  ' '+newbase2[index]+' '+newbase[index]+' '  
         // })
         // console.log(newbase)
+=======
+>>>>>>> artur:src/pages/pokemon/[id].js
 
         console.log(JSON.parse(data.base))
         
 
+<<<<<<< HEAD:src/pages/pokemon/[slug].js
 
 
+=======
+>>>>>>> artur:src/pages/pokemon/[id].js
     },[data])
 
 
