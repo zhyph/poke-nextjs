@@ -1,52 +1,31 @@
-
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-
-
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Index() {
-    const router = useRouter();
-    const data = router.query;
+  const router = useRouter();
+  const data = router.query;
 
-    useEffect(()=>{
+  useEffect(() => {
+    console.log(data);
+    // console.log(data.base)
+    // const arr = data.base.split(',')
+    // console.log(arr)
+    // const newbase = []
+    // arr.map((item)=>{
+    //     newbase.push(item.replace(/[^\d]+/g,''))
+    // })
+    // console.log(newbase)
+    // const newbase2 = ['HP','Attack','Defense','Sp. Attack','Sp.Defense','Speed']
+    // newbase.map((item,index)=>{
+    //    newbase[index] =  ' '+newbase2[index]+' '+newbase[index]+' '
+    // })
+    // console.log(newbase)
 
-        console.log(data)
-<<<<<<< HEAD:src/pages/pokemon/[slug].js
-        // console.log(data.base)
-        // const arr = data.base.split(',')
-        // console.log(arr)
-        // const newbase = []
-        // arr.map((item)=>{
-        //     newbase.push(item.replace(/[^\d]+/g,''))
-        // })
-        // console.log(newbase)
-        // const newbase2 = ['HP','Attack','Defense','Sp. Attack','Sp.Defense','Speed']
-        // newbase.map((item,index)=>{
-        //    newbase[index] =  ' '+newbase2[index]+' '+newbase[index]+' '  
-        // })
-        // console.log(newbase)
-=======
->>>>>>> artur:src/pages/pokemon/[id].js
+    console.log(JSON.parse(data.base));
+  }, [data]);
 
-        console.log(JSON.parse(data.base))
-        
-
-<<<<<<< HEAD:src/pages/pokemon/[slug].js
-
-
-=======
->>>>>>> artur:src/pages/pokemon/[id].js
-    },[data])
-
-
-    return (
-        <>
-           teste
-        </>
-    )
+  return <>teste</>;
 }
-
-
 
 // export async function getServerSideProps() {
 
@@ -61,7 +40,6 @@ export default function Index() {
 //     //   const pokemon = await result.json()
 //     //   arrayData.push(pokemon)
 //     // })
-
 
 //     return {
 //         props: {
