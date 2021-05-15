@@ -1,4 +1,5 @@
 import { Box, Center, Grid } from "@chakra-ui/layout";
+import {Heading}from "@chakra-ui/react"
 import { Image } from '@chakra-ui/image'
 import { Container } from "../components/Container";
 import { pokedex } from '../pokemon.json-master/pokedex'
@@ -29,22 +30,22 @@ export default function Index() {
 
 
   return (
-    <Container height="100vh">
+    <Container height="100vh" >
 
 
 
       <Grid
-        bg="black"
+        bg="white"
         templateColumns="repeat(4, 1fr)"
         width="100%"
-        height="100vh"
-        gap={5}
+        height="auto"
+        gap={3}
       >
         {pokedex.map((poke) => (
           <Box>
-            <Center w="200px" h="200" bg="red">
+            <Center w="200px" h="200" bg="red" flexDirection="column"  borderRadius='20px' >
 
-              <h1>{poke.name.english} {replace(poke.id)}</h1>
+              <h1>{poke.name.english} </h1>
               <Image
                 boxSize="100px"
                 objectFit="cover"
