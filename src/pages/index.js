@@ -44,14 +44,16 @@ export default function Index() {
           {pokedex.map((poke) => (
 
 <Link href={{
-  pathname: '/pokemon/[id]',
+  pathname: '/pokemon/[slug]',
   query: {
     name: poke.name.english,
     id: poke.id,
     img:replace(poke.id),
     base:JSON.stringify(poke.base),
-    type:poke.type
+    type:poke.type,
+    slug: 'my-post'
   },
+  
 }}
 >
             <Flex justifyContent="center" alignItems="center">
