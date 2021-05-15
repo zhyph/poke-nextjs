@@ -25,7 +25,7 @@ function replace(a) {
 }
 
 export default function Index() {
-  return (
+    return (
 
   
     <Box bg="black">
