@@ -1,16 +1,59 @@
-<<<<<<< HEAD
-import { } from '@chakra-ui/react'
+import { Box, Center, Grid } from "@chakra-ui/layout";
+import { Image } from '@chakra-ui/image'
+import { Container } from "../components/Container";
+import { pokedex } from '../pokemon.json-master/pokedex'
 
-import { Container } from '../components/Container'
 
 
-export default function Index({ data }) {
+
+function replace(a) {
+
+  console.log('teste', a)
+
+  if (a < 10) {
+    console.log('/images/00' + a + '.png')
+    return '/images/00' + a + '.png'
+  }
+  if (a < 100) {
+    return '/images/0' + a + '.png'
+  }
+  if (a < 1000) {
+    return '/images/' + a + '.png'
+  }
+
+
+}
+
+export default function Index() {
 
 
 
   return (
     <Container height="100vh">
-    
+
+
+
+      <Grid
+        bg="black"
+        templateColumns="repeat(4, 1fr)"
+        width="100%"
+        height="100vh"
+        gap={5}
+      >
+        {pokedex.map((poke) => (
+          <Box>
+            <Center w="200px" h="200" bg="red">
+
+              <h1>{poke.name.english} {replace(poke.id)}</h1>
+              <Image
+                boxSize="100px"
+                objectFit="cover"
+                src={replace(poke.id)}
+                alt="Segun Adebayo" />
+            </Center>
+          </Box>
+        ))}
+      </Grid>
 
     </Container>
   )
@@ -24,43 +67,19 @@ export async function getServerSideProps() {
 
   const listaPokemon = await result.json()
 
+  // const arrayData = []
+
+  // listaPokemon.results.map((item)=>{
+  //   const result = await fetch(item.url);
+  //   const pokemon = await result.json()
+  //   arrayData.push(pokemon)
+  // })
+
 
   return {
     props: {
+
       data: listaPokemon
-        }
+    }
   }
 }
-=======
-import { Box, Center, Grid } from "@chakra-ui/layout";
-import { Container } from "../components/Container";
-
-const Index = ({ data }) => {
-  console.log(data);
-
-  return (
-    <Grid bg="black" templateColumns="repeat(4, 1fr)" width="100%" height="100vh" gap={5}>
-      {data.map((poke) => (
-        <Center w="200px" h="200" bg="red">
-          <h1>{poke.name}</h1>
-        </Center>
-      ))}
-    </Grid>
-  );
-};
-
-export default Index;
-
-export const getServerSideProps = async (ctx) => {
-  const res = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=50&offset=200"
-  );
-  const data = await res.json();
-
-  return {
-    props: {
-      data: data.results,
-    },
-  };
-};
->>>>>>> 1e8cb622873e1b99f2073a22ca712195144b427e

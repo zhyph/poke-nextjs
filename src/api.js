@@ -1,1 +1,1 @@
-export const apibase = 'https://pokeapi.co/api/v2/pokemon?limit=500&offset=200'
+export const apibase = 'https://pokeapi.co/api/v2/pokemon?limit=10&offset=0'
