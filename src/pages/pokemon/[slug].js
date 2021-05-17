@@ -1,5 +1,9 @@
+import { Center, Grid } from "@chakra-ui/layout";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { Hero } from "../../components/Hero";
+import { Layout } from "../../components/Layout";
 
 export default function Index() {
   const router = useRouter();
@@ -24,7 +28,19 @@ export default function Index() {
     console.log(JSON.parse(data.base));
   }, [data]);
 
-  return <>teste</>;
+  return (
+    <Layout>
+      <Center
+        width="100vh"
+        height="70vh"
+        bg="white"
+        borderRadius="3%"
+        marginBottom="3"
+      >
+        <h1>Teste</h1>
+      </Center>
+    </Layout>
+  );
 }
 
 // export async function getServerSideProps() {
