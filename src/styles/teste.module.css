@@ -1,4 +1,25 @@
-.teste{
-    background-color: blue;
-    cursor: pointer;
+@keyframes invert {
+  0% {
+    background-image: linear-gradient(to right, #ff0080, #7928ca);
+  }
+  100% {
+    background-image: linear-gradient(to right, #7928ca, #ff0080);
+  }
+}
+
+@keyframes translateY {
+  from {
+    /* transform: scale(1); */
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+.inverted:hover {
+  animation: invert .1s ease-in-out 0s normal 1 forwards running;
+}
+
+.cardTranslateY:hover {
+  animation: translateY 0.1s linear 0s normal 1 forwards running;
 }

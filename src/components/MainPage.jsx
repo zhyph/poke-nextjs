@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { pokedex } from "../pokemon.json-master/pokedex";
 import { Layout } from "./Layout";
+import styles from "../styles/teste.module.css";
 
 const colours = {
   Normal: "#A8a77a",
@@ -51,7 +52,7 @@ const bgColoursType = (a) => {
 
 // bgColoursType(poke.type) ||
 
-console.log(bgColoursType(pokedex[0].type[0]));
+// console.log(bgColoursType(pokedex[0].type[0]));
 
 function MainPage() {
   function replace(a) {
@@ -94,6 +95,7 @@ function MainPage() {
           >
             <Center>
               <Box
+                className={styles.cardTranslateY}
                 bg={bgColoursType(poke.type) || "#D9DFD8"}
                 display="flex"
                 flexDirection="column"
@@ -104,23 +106,36 @@ function MainPage() {
                 overflow="hidden"
                 maxH="200px"
               >
-                <Box marginStart="4" marginTop="4" w="auto" h="auto">
-                  <Text fontSize="xl" color="white">
-                    {poke.name.english}
-                  </Text>
-                  <Center
-                    bg={bgColoursType(poke.type[0]) || "#D9DFD8"}
-                    display="inline-block"
-                    borderRadius="20%"
-                    filter=" brightness(70%)"
-                    mt=".2rem"
-                    ms=".5rem"
-                  >
-                    <Text filter="none" color="white" padding="5px">
-                      {poke.type[0]}
+                <Grid templateColumns="repeat(2, 1fr)">
+                  <Box marginStart="4" marginTop="4" w="auto" h="auto">
+                    <Text fontSize="2xl" color="white">
+                      {poke.name.english}
                     </Text>
-                  </Center>
-                </Box>
+                    <Center
+                      bg={bgColoursType(poke.type[0]) || "#D9DFD8"}
+                      display="inline-block"
+                      borderRadius="20%"
+                      filter=" brightness(70%)"
+                      mt=".2rem"
+                      ms=".5rem"
+                    >
+                      <Text fontSize="lg" color="white" padding="5px">
+                        {poke.type[0]}
+                      </Text>
+                    </Center>
+                  </Box>
+                  <Flex justifyContent="center" alignItems="center">
+                    <Text
+                      marginBottom="20px"
+                      zIndex="xl"
+                      fontSize="lg"
+                      color="white"
+                      fontWeight="bold"
+                    >
+                      #{poke.id}
+                    </Text>
+                  </Flex>
+                </Grid>
                 <Box
                   display="flex"
                   justifyContent="flex-end"
@@ -129,18 +144,18 @@ function MainPage() {
                   h="auto"
                 >
                   <Image
-                    boxSize="200px"
+                    boxSize="auto"
                     objectFit="cover"
                     src="/pokeballwb.png"
                     position="relative"
-                    left="160px"
-                    top="-10px"
+                    left="180px"
+                    top="-40px"
                     filter="opacity(30%)"
                   />
                   <Image
                     boxSize="100px"
                     objectFit="cover"
-                    m="10px"
+                    marginEnd="20px"
                     position="relative"
                     zIndex="1"
                     src={replace(poke.id)}
