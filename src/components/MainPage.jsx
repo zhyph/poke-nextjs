@@ -133,10 +133,7 @@ function MainPage() {
                   >
                     <Grid templateColumns="repeat(2, 1fr)">
                       <Box marginStart="4" marginTop="4" w="auto" h="auto">
-                        <Text
-                          fontSize={poke.name.english.length > 8 ? "lg" : "2xl"}
-                          color="white"
-                        >
+                        <Text fontSize="lg" color="white">
                           {poke.name.english}
                         </Text>
                         <Center
@@ -180,19 +177,19 @@ function MainPage() {
                         src="/pokeballwb.png"
                         position="absolute"
                         left="60px"
-                        top="-20px"
+                        top="-40px"
+                        className={styles.cardTranslateY}
                         filter="opacity(30%)"
                       />
                       <Image
                         boxSize="100px"
                         objectFit="cover"
-                        mr="20px"
-                        mb="20px"
                         position="relative"
-                        top="0"
-                        left="0"
+                        top="-10px"
+                        left="-20px"
                         zIndex="1"
                         src={replace(poke.id)}
+                        className={styles.cardTranslateY}
                         alt={poke.name.english}
                       />
                     </Box>
