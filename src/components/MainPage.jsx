@@ -123,14 +123,13 @@ function MainPage() {
                   <Box
                     className={styles.cardTranslateY}
                     bg={bgColoursType(poke.type) || "#D9DFD8"}
-                    display="flex"
                     flexDirection="column"
                     borderRadius="20px"
                     cursor="pointer"
                     w="90%"
                     height="100%"
                     overflow="hidden"
-                    maxH="200px"
+                    maxH="190px"
                   >
                     <Grid templateColumns="repeat(2, 1fr)">
                       <Box marginStart="4" marginTop="4" w="auto" h="auto">
@@ -168,17 +167,20 @@ function MainPage() {
                     <Box
                       display="flex"
                       justifyContent="flex-end"
-                      marginEnd="4"
+                      // marginEnd="4"
                       w="auto"
                       h="auto"
+                      position="relative"
+                      top="0"
+                      left="0"
                     >
                       <Image
                         boxSize="auto"
                         objectFit="cover"
                         src="/pokeballwb.png"
-                        position="relative"
-                        left="180px"
-                        top="-40px"
+                        position="absolute"
+                        left="60px"
+                        top="-20px"
                         filter="opacity(30%)"
                       />
                       <Image
@@ -187,6 +189,8 @@ function MainPage() {
                         mr="20px"
                         mb="20px"
                         position="relative"
+                        top="0"
+                        left="0"
                         zIndex="1"
                         src={replace(poke.id)}
                         alt={poke.name.english}
