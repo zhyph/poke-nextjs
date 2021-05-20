@@ -94,7 +94,7 @@ function MainPage() {
           </Text>
         }
       >
-        <Center className="infinite-scroll-component__outerdiv" width="100%">
+        <Center>
           <Grid
             templateColumns="repeat(3, 1fr)"
             width="50%"
@@ -181,7 +181,8 @@ function MainPage() {
                       <Image
                         boxSize="100px"
                         objectFit="cover"
-                        marginEnd="20px"
+                        mr="20px"
+                        mb="20px"
                         position="relative"
                         zIndex="1"
                         src={replace(poke.id)}
