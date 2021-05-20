@@ -85,6 +85,7 @@ function MainPage() {
   return (
     <Layout>
       <InfiniteScroll
+        style={{ width: "100%" }}
         dataLength={items.length}
         next={fetchMoreData}
         hasMore={hasMore}

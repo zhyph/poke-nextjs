@@ -7,7 +7,9 @@ export const Layout = ({ children }) => {
     <Box bg="black" height="100vh">
       <Hero>Pokedex</Hero>
       {/* <Box> */}
-      <Center bg="black" height="auto">{children}</Center>
+      <Center bg="black" width="100%" height="auto">
+        {children}
+      </Center>
       {/* </Box> */}
     </Box>
   );
