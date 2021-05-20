@@ -1,10 +1,11 @@
 import { Image } from "@chakra-ui/image";
 import { Box, Center, Flex, Grid, Text } from "@chakra-ui/layout";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { pokedex } from "../pokemon.json-master/pokedex";
 import { Layout } from "./Layout";
 import styles from "../styles/teste.module.css";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const colours = {
   Normal: "#A8a77a",
@@ -27,34 +28,25 @@ const colours = {
   Fairy: "#D685ad",
 };
 
-const bgColoursType = (a) => {
-  const arrTypeColour = Object.entries(colours);
-  const b = a;
-  //   console.log(b);
-  //   console.log(arrTypeColour);
-  let results = arrTypeColour.map((item) => {
-    if (item[0] === b) {
-      //   console.log(item[1]);
-      return item[1];
-    } else if (item[0] === b[0] || item[0] === b[1]) {
-      return item[1];
-    }
-  });
-  //   console.log(results);
-  results = results.filter((value) => {
-    return value !== undefined;
-  });
-  //   console.log(results);
-  return results.length < 2
-    ? results[0]
-    : `linear-gradient(90deg, ${results[0]} 0%, ${results[1]} 100%)`;
-};
-
-// bgColoursType(poke.type) ||
-
-// console.log(bgColoursType(pokedex[0].type[0]));
-
 function MainPage() {
+  const [next, setNext] = useState(18);
+  const [items, setItems] = useState(pokedex.slice(0, next));
+  const [hasMore, setHasMore] = useState(true);
+  console.log(items);
+
+  const fetchMoreData = () => {
+    if (items.length >= pokedex.length) {
+      setHasMore(false);
+      return;
+    }
+    // a fake async api call like which sends
+    // 20 more records in .5 secs
+    setTimeout(() => {
+      setItems(items.concat(pokedex.slice(next + 1, next + 18)));
+      setNext(next + 18);
+    }, 500);
+  };
+
   function replace(a) {
     if (a < 10) {
       return "/images/00" + a + ".png";
@@ -67,108 +59,155 @@ function MainPage() {
     }
   }
 
+  const bgColoursType = (a) => {
+    const arrTypeColour = Object.entries(colours);
+    const b = a;
+    //   console.log(b);
+    //   console.log(arrTypeColour);
+    let results = arrTypeColour.map((item) => {
+      if (item[0] === b) {
+        //   console.log(item[1]);
+        return item[1];
+      } else if (item[0] === b[0] || item[0] === b[1]) {
+        return item[1];
+      }
+    });
+    //   console.log(results);
+    results = results.filter((value) => {
+      return value !== undefined;
+    });
+    //   console.log(results);
+    return results.length < 2
+      ? results[0]
+      : `linear-gradient(90deg, ${results[0]} 0%, ${results[1]} 100%)`;
+  };
+
   return (
     <Layout>
-      <Grid
-        templateColumns="repeat(3, 1fr)"
-        width="50%"
-        height="auto"
-        padding="6"
-        marginTop="6"
-        marginBottom="6"
-        gap="5"
-        bg="white"
-        borderRadius="3%"
+      <InfiniteScroll
+        dataLength={items.length}
+        next={fetchMoreData}
+        hasMore={hasMore}
+        loader={
+          <Text fontSize="4xl" color="white" textAlign="center" pb="40px">
+            Loading...
+          </Text>
+        }
       >
-        {pokedex.map((poke) => (
-          <Link
-            href={{
-              pathname: "/pokemon/[id]",
-              query: {
-                name: poke.name.english,
-                id: poke.id,
-                img: replace(poke.id),
-                base: JSON.stringify(poke.base),
-                type: poke.type,
-              },
-            }}
+        <Center>
+          <Grid
+            templateColumns="repeat(3, 1fr)"
+            width="50%"
+            height="auto"
+            padding="6"
+            marginTop="6"
+            marginBottom="6"
+            gap="5"
+            bg="white"
+            borderRadius="3%"
           >
-            <Center>
-              <Box
-                className={styles.cardTranslateY}
-                bg={bgColoursType(poke.type) || "#D9DFD8"}
-                display="flex"
-                flexDirection="column"
-                borderRadius="20px"
-                cursor="pointer"
-                w="90%"
-                height="100%"
-                overflow="hidden"
-                maxH="200px"
+            {items.map((poke, index) => (
+              <Link
+                href={{
+                  pathname: "/pokemon/[id]",
+                  query: {
+                    name: poke.name.english,
+                    id: poke.id,
+                    img: replace(poke.id),
+                    base: JSON.stringify(poke.base),
+                    type: poke.type,
+                  },
+                }}
               >
-                <Grid templateColumns="repeat(2, 1fr)">
-                  <Box marginStart="4" marginTop="4" w="auto" h="auto">
-                    <Text fontSize="2xl" color="white">
-                      {poke.name.english}
-                    </Text>
-                    <Center
-                      bg={bgColoursType(poke.type[0]) || "#D9DFD8"}
-                      display="inline-block"
-                      borderRadius="20%"
-                      filter=" brightness(70%)"
-                      mt=".2rem"
-                      ms=".5rem"
+                <Center>
+                  <Box
+                    className={styles.cardTranslateY}
+                    bg={bgColoursType(poke.type) || "#D9DFD8"}
+                    display="flex"
+                    flexDirection="column"
+                    borderRadius="20px"
+                    cursor="pointer"
+                    w="90%"
+                    height="100%"
+                    overflow="hidden"
+                    maxH="200px"
+                  >
+                    <Grid templateColumns="repeat(2, 1fr)">
+                      <Box marginStart="4" marginTop="4" w="auto" h="auto">
+                        <Text fontSize="2xl" color="white">
+                          {poke.name.english}
+                        </Text>
+                        <Center
+                          bg={bgColoursType(poke.type[0]) || "#D9DFD8"}
+                          display="inline-block"
+                          borderRadius="20%"
+                          filter=" brightness(70%)"
+                          mt=".2rem"
+                          ms=".5rem"
+                        >
+                          <Text fontSize="lg" color="white" padding="5px">
+                            {poke.type[0]}
+                          </Text>
+                        </Center>
+                      </Box>
+                      <Flex justifyContent="center" alignItems="center">
+                        <Text
+                          marginBottom="20px"
+                          zIndex="xl"
+                          fontSize="lg"
+                          color="white"
+                          fontWeight="bold"
+                        >
+                          #{poke.id}
+                        </Text>
+                      </Flex>
+                    </Grid>
+                    <Box
+                      display="flex"
+                      justifyContent="flex-end"
+                      marginEnd="4"
+                      w="auto"
+                      h="auto"
                     >
-                      <Text fontSize="lg" color="white" padding="5px">
-                        {poke.type[0]}
-                      </Text>
-                    </Center>
+                      <Image
+                        boxSize="auto"
+                        objectFit="cover"
+                        src="/pokeballwb.png"
+                        position="relative"
+                        left="180px"
+                        top="-40px"
+                        filter="opacity(30%)"
+                      />
+                      <Image
+                        boxSize="100px"
+                        objectFit="cover"
+                        marginEnd="20px"
+                        position="relative"
+                        zIndex="1"
+                        src={replace(poke.id)}
+                        alt={poke.name.english}
+                      />
+                    </Box>
                   </Box>
-                  <Flex justifyContent="center" alignItems="center">
-                    <Text
-                      marginBottom="20px"
-                      zIndex="xl"
-                      fontSize="lg"
-                      color="white"
-                      fontWeight="bold"
-                    >
-                      #{poke.id}
-                    </Text>
-                  </Flex>
-                </Grid>
-                <Box
-                  display="flex"
-                  justifyContent="flex-end"
-                  marginEnd="4"
-                  w="auto"
-                  h="auto"
-                >
-                  <Image
-                    boxSize="auto"
-                    objectFit="cover"
-                    src="/pokeballwb.png"
-                    position="relative"
-                    left="180px"
-                    top="-40px"
-                    filter="opacity(30%)"
-                  />
-                  <Image
-                    boxSize="100px"
-                    objectFit="cover"
-                    marginEnd="20px"
-                    position="relative"
-                    zIndex="1"
-                    src={replace(poke.id)}
-                    alt={poke.name.english}
-                  />
-                </Box>
-              </Box>
-            </Center>
-          </Link>
-        ))}
-      </Grid>
+                </Center>
+              </Link>
+            ))}
+          </Grid>
+        </Center>
+      </InfiniteScroll>
     </Layout>
   );
 }
 
 export default MainPage;
+
+// export const getStaticProps = async (ctx) => {
+//   const res = await fetch("http://localhost:3000/api/pokemon");
+//   const data = await res.json();
+//   console.log(data);
+//   return {
+//     props: {
+//       data: res.listaPokemon,
+//     },
+//   };
+// };
