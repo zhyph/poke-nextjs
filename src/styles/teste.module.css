@@ -17,9 +17,13 @@
 }
 
 .inverted:hover {
-  animation: invert .1s ease-in-out 0s normal 1 forwards running;
+  animation: invert 0.1s ease-in-out 0s normal 1 forwards running;
 }
 
 .cardTranslateY:hover {
   animation: translateY 0.1s linear 0s normal 1 forwards running;
+}
+
+.infinite-scroll-component__outerdiv {
+  width: 100%;
 }

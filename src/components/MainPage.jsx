@@ -85,7 +85,6 @@ function MainPage() {
   return (
     <Layout>
       <InfiniteScroll
-        style={{ width: "100%" }}
         dataLength={items.length}
         next={fetchMoreData}
         hasMore={hasMore}
@@ -95,7 +94,7 @@ function MainPage() {
           </Text>
         }
       >
-        <Center width="100%">
+        <Center className="infinite-scroll-component__outerdiv" width="100%">
           <Grid
             templateColumns="repeat(3, 1fr)"
             width="50%"
