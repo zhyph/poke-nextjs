@@ -29,8 +29,8 @@ const colours = {
 };
 
 function MainPage() {
-  const [next, setNext] = useState(18);
-  const [items, setItems] = useState(pokedex.slice(0, next));
+  const [next, setNext] = useState(20);
+  const [items, setItems] = useState(pokedex.slice(0, 20));
   const [hasMore, setHasMore] = useState(true);
   console.log(items);
 
@@ -42,8 +42,8 @@ function MainPage() {
     // a fake async api call like which sends
     // 20 more records in .5 secs
     setTimeout(() => {
-      setItems(items.concat(pokedex.slice(next + 1, next + 18)));
-      setNext(next + 18);
+      setItems(items.concat(pokedex.slice(next, next + 20)));
+      setNext(next + 20);
     }, 500);
   };
 
@@ -134,7 +134,10 @@ function MainPage() {
                   >
                     <Grid templateColumns="repeat(2, 1fr)">
                       <Box marginStart="4" marginTop="4" w="auto" h="auto">
-                        <Text fontSize="2xl" color="white">
+                        <Text
+                          fontSize={poke.name.english.length > 8 ? "lg" : "2xl"}
+                          color="white"
+                        >
                           {poke.name.english}
                         </Text>
                         <Center
