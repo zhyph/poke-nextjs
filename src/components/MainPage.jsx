@@ -94,7 +94,7 @@ function MainPage() {
           </Text>
         }
       >
-        <Center>
+        <Center width="100%">
           <Grid
             templateColumns="repeat(3, 1fr)"
             width="50%"
