@@ -49,7 +49,7 @@ function MainPage() {
 
   const animation = prefersReducedMotion
     ? undefined
-    : `${gradient} 5s ease infinite alternate`;
+    : `${gradient} 4s ease infinite alternate`;
   // console.log(items);
 
   const fetchMoreData = () => {
@@ -137,9 +137,8 @@ function MainPage() {
                   },
                 }}
               >
-                <Center>
+                <Center className={styles.cardTranslateY}>
                   <Box
-                    className={styles.cardTranslateY}
                     bg={bgColoursType(poke.type) || "#D9DFD8"}
                     flexDirection="column"
                     borderRadius="20px"
