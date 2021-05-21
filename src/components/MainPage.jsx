@@ -1,3 +1,4 @@
+import { keyframes, usePrefersReducedMotion } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/image";
 import { Box, Center, Flex, Grid, Text } from "@chakra-ui/layout";
 import Link from "next/link";
@@ -28,11 +29,28 @@ const colours = {
   Fairy: "#D685ad",
 };
 
+const gradient = keyframes`
+ 0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100%{
+    background-position: 50% 0%;
+  }
+`;
+
 function MainPage() {
   const [next, setNext] = useState(20);
   const [items, setItems] = useState(pokedex.slice(0, 20));
   const [hasMore, setHasMore] = useState(true);
-  console.log(items);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const animation = prefersReducedMotion
+    ? undefined
+    : `${gradient} 5s ease infinite alternate`;
+  // console.log(items);
 
   const fetchMoreData = () => {
     if (items.length >= pokedex.length) {
@@ -79,7 +97,7 @@ function MainPage() {
     //   console.log(results);
     return results.length < 2
       ? results[0]
-      : `linear-gradient(90deg, ${results[0]} 0%, ${results[1]} 100%)`;
+      : `linear-gradient(90deg, ${results[0]}, ${results[1]})`;
   };
 
   return (
@@ -127,8 +145,13 @@ function MainPage() {
                     borderRadius="20px"
                     cursor="pointer"
                     w="90%"
+                    animation="paused"
                     height="100%"
                     overflow="hidden"
+                    _hover={{
+                      bgSize: "150% 150%",
+                      animation,
+                    }}
                     maxH="190px"
                   >
                     <Grid templateColumns="repeat(2, 1fr)">
@@ -169,6 +192,7 @@ function MainPage() {
                       h="auto"
                       position="relative"
                       top="0"
+                      className={styles.cardTranslateY}
                       left="0"
                     >
                       <Image
@@ -178,7 +202,6 @@ function MainPage() {
                         position="absolute"
                         left="60px"
                         top="-40px"
-                        className={styles.cardTranslateY}
                         filter="opacity(30%)"
                       />
                       <Image
@@ -189,7 +212,7 @@ function MainPage() {
                         left="-20px"
                         zIndex="1"
                         src={replace(poke.id)}
-                        className={styles.cardTranslateY}
+                        // className={styles.cardTranslateY}
                         alt={poke.name.english}
                       />
                     </Box>

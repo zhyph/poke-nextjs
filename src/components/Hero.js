@@ -18,7 +18,7 @@ export const Hero = ({ children }) => (
       <a>
         <Heading
           fontSize="10vw"
-          bgGradient="linear(to-r, #FF0080, #7928CA)"
+          /* bgGradient="linear(to-r, #FF0080, #7928CA)" */
           bgClip="text"
           className={styles.inverted}
         >
