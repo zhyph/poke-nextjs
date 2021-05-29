@@ -19,7 +19,8 @@ import MainPage from "../components/MainPage";
 //   }
 // }
 
-export default function Index() {
+export default function Index({ data }) {
+  // console.log(data);
   return (
     // <Box bg="black">
     //   <Link href="/" passHref>
@@ -81,7 +82,7 @@ export default function Index() {
     //     </Grid>
     //   </Center>
     // </Box>
-    <MainPage></MainPage>
+    <MainPage data={data}></MainPage>
   );
 }
 
@@ -104,3 +105,13 @@ export default function Index() {
 //     },
 //   };
 // }
+export async function getStaticProps(context) {
+  const res = await fetch("http://localhost:3000/api/pokemon");
+  const data = await res.json();
+  console.log(data.listaPokemon);
+  return {
+    props: {
+      data: data.listaPokemon,
+    },
+  };
+}

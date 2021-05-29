@@ -1,8 +1,8 @@
-import { keyframes, usePrefersReducedMotion } from "@chakra-ui/react";
-import { Image } from "@chakra-ui/image";
+import { keyframes, usePrefersReducedMotion, Image } from "@chakra-ui/react";
+// import { Image } from "@chakra-ui/image";
 import { Box, Center, Flex, Grid, Text } from "@chakra-ui/layout";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { pokedex } from "../pokemon.json-master/pokedex";
 import { Layout } from "./Layout";
 import styles from "../styles/teste.module.css";
@@ -41,9 +41,24 @@ const gradient = keyframes`
   }
 `;
 
-function MainPage() {
+function MainPage({ data }) {
+  // console.log(data);
+
+  // useEffect(() => {
+  //   const fetchPoke = async () => {
+  //     const res = await fetch("http://localhost:3000/api/pokemon");
+  //     const data = await res.json();
+  //     console.log(data);
+  //     setPokemonList(data.listaPokemon);
+  //   };
+
+  //   fetchPoke();
+  //   console.log(pokemonList);
+  // }, []);
+
+  // const [pokemonList, setPokemonList] = useState();
   const [next, setNext] = useState(20);
-  const [items, setItems] = useState(pokedex.slice(0, 20));
+  const [items, setItems] = useState(data.slice(0, 20));
   const [hasMore, setHasMore] = useState(true);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -53,14 +68,14 @@ function MainPage() {
   // console.log(items);
 
   const fetchMoreData = () => {
-    if (items.length >= pokedex.length) {
+    if (items.length >= data.length) {
       setHasMore(false);
       return;
     }
     // a fake async api call like which sends
     // 20 more records in .5 secs
     setTimeout(() => {
-      setItems(items.concat(pokedex.slice(next, next + 20)));
+      setItems(items.concat(data.slice(next, next + 20)));
       setNext(next + 20);
     }, 500);
   };
@@ -227,14 +242,3 @@ function MainPage() {
 }
 
 export default MainPage;
-
-// export const getStaticProps = async (ctx) => {
-//   const res = await fetch("http://localhost:3000/api/pokemon");
-//   const data = await res.json();
-//   console.log(data);
-//   return {
-//     props: {
-//       data: res.listaPokemon,
-//     },
-//   };
-// };
