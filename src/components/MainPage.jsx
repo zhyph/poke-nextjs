@@ -58,7 +58,7 @@ function MainPage({ data }) {
 
   // const [pokemonList, setPokemonList] = useState();
   const [next, setNext] = useState(20);
-  const [items, setItems] = useState(data.slice(0, 20));
+  const [items, setItems] = useState(pokedex.slice(0, 20));
   const [hasMore, setHasMore] = useState(true);
   const prefersReducedMotion = usePrefersReducedMotion();
 

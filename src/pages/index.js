@@ -105,13 +105,13 @@ export default function Index({ data }) {
 //     },
 //   };
 // }
-export async function getStaticProps(context) {
-  const res = await fetch("http://localhost:3000/api/pokemon");
-  const data = await res.json();
-  console.log(data.listaPokemon);
-  return {
-    props: {
-      data: data.listaPokemon,
-    },
-  };
-}
+// export async function getStaticProps(context) {
+//   const res = await fetch("http://localhost:3000/api/pokemon");
+//   const data = await res.json();
+//   console.log(data.listaPokemon);
+//   return {
+//     props: {
+//       data: data.listaPokemon,
+//     },
+//   };
+// }
